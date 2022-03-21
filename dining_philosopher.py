@@ -5,7 +5,7 @@ philosophers_num = sys.argv [1]
 go = True
 
 
-class Philosopher(threading.Thread): #this thing is a thread
+class Philosopher(threading.Thread):
     def __init__(self, threadID, left_fork, right_fork):
         threading.Thread.__init__(self)
         self.id = threadID
@@ -22,12 +22,12 @@ class Philosopher(threading.Thread): #this thing is a thread
             acquired = self.right_fork.acquire(False)
             if acquired:
                 print(f"philosopher {self.id} picks up right fork")
-                print(f"philosopher {self.id} is eating...")            #
-                self.left_fork.release()                                #This block doesn't seem to
-                print(f"philosopher {self.id} puts down left fork.")    #be running
-                self.right_fork.release()                               #
-                print(f"philosopher {self.id} puts down right fork.")   #
-                break                                                   #
+                print(f"philosopher {self.id} is eating...")            
+                self.left_fork.release()                                
+                print(f"philosopher {self.id} puts down left fork.")    
+                self.right_fork.release()                               
+                print(f"philosopher {self.id} puts down right fork.")   
+                break                                                   
             else:
                 self.left_fork.release()
                 print(f"philosopher {self.id} puts down left fork.")
@@ -47,7 +47,7 @@ def main():
         lock = threading.Lock()
         locks.append(lock)
     for i in range(philosophers_num):
-        thread = Philosopher(i, locks[i], locks[(i+1)%philosophers_num]) #shows out of range
+        thread = Philosopher(i, locks[i], locks[(i+1)%philosophers_num]) 
         threads.append(thread)
 
     for i in range(philosophers_num):
@@ -57,6 +57,3 @@ def main():
     go = False
 
 main()
-
-#, locks[i], locks[i+1%philosophers_num]
-#^^goes in thread after Philosopher i
