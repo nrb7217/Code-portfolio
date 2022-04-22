@@ -32,7 +32,7 @@ void print(struct Blockchain *chain) {
     struct Block *head = chain->head;
     while(head != NULL) {
         printf("[%d : %d]", head->height, head->data);
-        head = head->prevBlock; //segmentation fault cause
+        head = head->prevBlock;
     }
     printf("\n");
 }
